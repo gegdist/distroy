@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(git -C /c/Projekte/distroy status)",
+      "Bash(bun install)",
+      "Bash(/c/Users/justi/.bun/bin/bun install:*)",
+      "Bash(git init:*)"
+    ]
+  }
+}
