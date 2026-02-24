@@ -9,6 +9,25 @@ import { RateLimiter } from '@/lib/api/rate-limiter';
 
 const BASE = 'https://discord.com/api/v9';
 
+type SearchSortBy = 'relevance' | 'timestamp';
+type SearchSortOrder = 'asc' | 'desc';
+
+export interface MessageSearchOptions {
+  offset?: number;
+  maxId?: string;
+  minId?: string;
+  sortBy?: SearchSortBy;
+  sortOrder?: SearchSortOrder;
+  includeNsfw?: boolean;
+}
+
+export interface ChannelMessagePageOptions {
+  before?: string;
+  after?: string;
+  around?: string;
+  limit?: number; // 1..100
+}
+
 export class DiscordClient {
   private token = '';
   private limiter = new RateLimiter();
@@ -69,16 +88,29 @@ export class DiscordClient {
    * Search messages authored by `authorId` in a guild.
    * Returns one page at a time (up to 25 messages).
    */
+  async searchGuild(guildId: string, authorId: string, offset?: number): Promise<SearchResponse>;
   async searchGuild(
     guildId: string,
     authorId: string,
-    offset = 0,
+    options?: MessageSearchOptions,
+  ): Promise<SearchResponse>;
+  async searchGuild(
+    guildId: string,
+    authorId: string,
+    offsetOrOptions: number | MessageSearchOptions = 0,
   ): Promise<SearchResponse> {
+    const options: MessageSearchOptions =
+      typeof offsetOrOptions === 'number' ? { offset: offsetOrOptions } : (offsetOrOptions ?? {});
+
     const qs = new URLSearchParams({
       author_id: authorId,
-      include_nsfw: 'true',
-      offset: String(offset),
+      include_nsfw: String(options.includeNsfw ?? true),
+      offset: String(options.offset ?? 0),
     });
+    if (options.maxId) qs.set('max_id', options.maxId);
+    if (options.minId) qs.set('min_id', options.minId);
+    if (options.sortBy) qs.set('sort_by', options.sortBy);
+    if (options.sortOrder) qs.set('sort_order', options.sortOrder);
     const { data } = await this.request<SearchResponse>(
       'GET',
       `/guilds/${guildId}/messages/search?${qs}`,
@@ -90,19 +122,55 @@ export class DiscordClient {
   /**
    * Search messages authored by `authorId` in a DM / group DM channel.
    */
+  async searchChannel(channelId: string, authorId: string, offset?: number): Promise<SearchResponse>;
   async searchChannel(
     channelId: string,
     authorId: string,
-    offset = 0,
+    options?: MessageSearchOptions,
+  ): Promise<SearchResponse>;
+  async searchChannel(
+    channelId: string,
+    authorId: string,
+    offsetOrOptions: number | MessageSearchOptions = 0,
   ): Promise<SearchResponse> {
+    const options: MessageSearchOptions =
+      typeof offsetOrOptions === 'number' ? { offset: offsetOrOptions } : (offsetOrOptions ?? {});
+
     const qs = new URLSearchParams({
       author_id: authorId,
-      offset: String(offset),
+      offset: String(options.offset ?? 0),
     });
+    if (options.maxId) qs.set('max_id', options.maxId);
+    if (options.minId) qs.set('min_id', options.minId);
+    if (options.sortBy) qs.set('sort_by', options.sortBy);
+    if (options.sortOrder) qs.set('sort_order', options.sortOrder);
     const { data } = await this.request<SearchResponse>(
       'GET',
       `/channels/${channelId}/messages/search?${qs}`,
       `search_channel_${channelId}`,
+    );
+    return data;
+  }
+
+  /**
+   * Deterministic message history paging in a channel (DM, group DM, or guild channel).
+   * Prefer this over search when Discord's index stalls.
+   */
+  async getChannelMessages(
+    channelId: string,
+    options: ChannelMessagePageOptions = {},
+  ): Promise<DiscordMessage[]> {
+    const qs = new URLSearchParams();
+    if (options.before) qs.set('before', options.before);
+    if (options.after) qs.set('after', options.after);
+    if (options.around) qs.set('around', options.around);
+    if (options.limit) qs.set('limit', String(options.limit));
+
+    const suffix = qs.toString();
+    const { data } = await this.request<DiscordMessage[]>(
+      'GET',
+      `/channels/${channelId}/messages${suffix ? `?${suffix}` : ''}`,
+      `history_${channelId}`,
     );
     return data;
   }

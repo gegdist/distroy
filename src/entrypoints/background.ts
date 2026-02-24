@@ -40,6 +40,32 @@ let lastTargetIds: string[] = [];
 const EMPTY_SEARCH_RETRY_MAX = 5;
 const EMPTY_SEARCH_RETRY_BASE_MS = 1200;
 const MIN_SCAN_ITEM_DURATION_MS = 1000;
+const SEARCH_PAGE_SIZE = 25;
+const HISTORY_PAGE_SIZE = 100;
+
+function decrementSnowflake(id: string): string {
+  try {
+    const v = BigInt(id);
+    if (v <= 0n) return id;
+    return (v - 1n).toString();
+  } catch {
+    return id;
+  }
+}
+
+function minMessageId(messages: Array<{ id: string }>): string | null {
+  if (messages.length === 0) return null;
+  try {
+    let min = BigInt(messages[0].id);
+    for (let i = 1; i < messages.length; i++) {
+      const v = BigInt(messages[i].id);
+      if (v < min) min = v;
+    }
+    return min.toString();
+  } catch {
+    return messages[messages.length - 1]?.id ?? null;
+  }
+}
 
 function incrementFailure(category: FailureCategory): void {
   state.failureSummary[category] += 1;
@@ -316,8 +342,6 @@ async function searchAndDeleteTarget(
   broadcastState();
 
   const userId = state.user!.id;
-  let offset = checkpoint.currentOffset;
-  let emptySearchRetries = 0;
   const handledMessageIds = new Set<string>();
   const targetStartDeleted = state.deleted;
   const targetStartFailed = state.failed;
@@ -333,34 +357,105 @@ async function searchAndDeleteTarget(
 
   await log(LogLevel.Info, `Deleting messages in "${target.name}"...`);
 
+  const attemptDelete = async (msg: DiscordMessage): Promise<void> => {
+    handledMessageIds.add(msg.id);
+
+    try {
+      const { deleted, reason } = await client.deleteMessage(msg.channel_id, msg.id);
+      if (deleted) {
+        state.deleted++;
+      } else {
+        state.skipped++;
+        if (reason === 'permission') incrementFailure('permission');
+        if (reason === 'notFound') incrementFailure('notFound');
+        await log(LogLevel.Warn, `Skipped message ${msg.id} (not found or no permission)`);
+      }
+    } catch (err) {
+      state.failed++;
+      incrementFailure(classifyDeleteError(err));
+      const errMsg = err instanceof Error ? err.message : String(err);
+      await log(LogLevel.Error, `Failed to delete ${msg.id}: ${errMsg}`);
+    }
+
+    checkpoint.processedInActiveTarget =
+      (state.deleted - targetStartDeleted) +
+      (state.failed - targetStartFailed) +
+      (state.skipped - targetStartSkipped);
+    syncCheckpoint();
+    broadcastState();
+  };
+
+  if (target.type === 'dm') {
+    let beforeId: string | undefined = checkpoint.cursorBeforeId || undefined;
+
+    while (!signal.aborted) {
+      await waitIfPaused(signal);
+      if (signal.aborted) return;
+
+      const page = await client.getChannelMessages(target.id, {
+        before: beforeId,
+        limit: HISTORY_PAGE_SIZE,
+      });
+      if (page.length === 0) break;
+
+      const nextBefore = page[page.length - 1]?.id;
+      if (!nextBefore || nextBefore === beforeId) break;
+
+      const authoredFresh = page.filter(
+        (msg) => msg.author.id === userId && !handledMessageIds.has(msg.id),
+      );
+
+      for (const msg of authoredFresh) {
+        if (signal.aborted) return;
+        await waitIfPaused(signal);
+        if (signal.aborted) return;
+        await attemptDelete(msg);
+      }
+
+      beforeId = nextBefore;
+      checkpoint.cursorBeforeId = beforeId;
+      checkpoint.currentOffset = 0;
+      syncCheckpoint();
+      await saveCheckpoint(checkpoint);
+    }
+
+    return;
+  }
+
+  // Guild-wide search is the only scalable enumerator. Use cursor paging via max_id
+  // to avoid offset-shift issues while deleting.
+  let emptyPageRetries = 0;
+
   while (!signal.aborted) {
     await waitIfPaused(signal);
     if (signal.aborted) return;
 
-    const result =
-      target.type === 'guild'
-        ? await client.searchGuild(target.id, userId, offset)
-        : await client.searchChannel(target.id, userId, offset);
+    const processedInTarget =
+      (state.deleted - targetStartDeleted) +
+      (state.failed - targetStartFailed) +
+      (state.skipped - targetStartSkipped);
+    const expectedRemaining = Math.max(target.messageCount - processedInTarget, 0);
 
-    const messages: DiscordMessage[] = result.messages.flat();
-    const freshMessages = messages.filter((msg) => {
-      if (msg.author.id !== userId) return false;
-      return !handledMessageIds.has(msg.id);
+    const cursor = checkpoint.cursorBeforeId || undefined;
+    const result = await client.searchGuild(target.id, userId, {
+      offset: 0,
+      maxId: cursor,
+      sortBy: 'timestamp',
+      sortOrder: 'desc',
+      includeNsfw: true,
     });
 
-    if (freshMessages.length === 0) {
-      const processedInTarget =
-        (state.deleted - targetStartDeleted) +
-        (state.failed - targetStartFailed) +
-        (state.skipped - targetStartSkipped);
-      const expectedRemaining = Math.max(target.messageCount - processedInTarget, 0);
+    const page: DiscordMessage[] = result.messages.flat();
+    const authored = page.filter((msg) => msg.author.id === userId);
+    const fresh = authored.filter((msg) => !handledMessageIds.has(msg.id));
 
-      if (expectedRemaining > 0 && emptySearchRetries < EMPTY_SEARCH_RETRY_MAX) {
-        emptySearchRetries++;
-        const waitMs = EMPTY_SEARCH_RETRY_BASE_MS * emptySearchRetries;
+    if (page.length === 0) {
+      if (expectedRemaining > 0 && emptyPageRetries < EMPTY_SEARCH_RETRY_MAX) {
+        emptyPageRetries++;
+        const waitMs = EMPTY_SEARCH_RETRY_BASE_MS * emptyPageRetries;
         await log(
           LogLevel.Warn,
-          `Search returned no new messages for "${target.name}" but about ${expectedRemaining} may remain. Retrying (${emptySearchRetries}/${EMPTY_SEARCH_RETRY_MAX})...`,
+          `Search returned no messages for "${target.name}" (cursor ${cursor ?? 'none'}). About ${expectedRemaining} may remain. Retrying (${emptyPageRetries}/${EMPTY_SEARCH_RETRY_MAX})...`,
         );
         await sleep(waitMs);
         continue;
@@ -374,43 +469,37 @@ async function searchAndDeleteTarget(
       }
       break;
     }
-    emptySearchRetries = 0;
 
-    for (const msg of freshMessages) {
+    emptyPageRetries = 0;
+
+    const oldestAuthoredId = minMessageId(authored) ?? minMessageId(page);
+    if (!oldestAuthoredId) break;
+
+    if (fresh.length === 0) {
+      // Page is repeating or max_id is inclusive. Advance the cursor and keep paging older.
+      const nextCursor = decrementSnowflake(oldestAuthoredId);
+      if (nextCursor === checkpoint.cursorBeforeId) {
+        const forced = decrementSnowflake(nextCursor);
+        if (forced === nextCursor) break;
+        checkpoint.cursorBeforeId = forced;
+      } else {
+        checkpoint.cursorBeforeId = nextCursor;
+      }
+      checkpoint.currentOffset = 0;
+      syncCheckpoint();
+      await saveCheckpoint(checkpoint);
+      continue;
+    }
+
+    for (const msg of fresh) {
       if (signal.aborted) return;
       await waitIfPaused(signal);
       if (signal.aborted) return;
-
-      handledMessageIds.add(msg.id);
-
-      try {
-        const { deleted, reason } = await client.deleteMessage(msg.channel_id, msg.id);
-        if (deleted) {
-          state.deleted++;
-        } else {
-          state.skipped++;
-          if (reason === 'permission') incrementFailure('permission');
-          if (reason === 'notFound') incrementFailure('notFound');
-          await log(LogLevel.Warn, `Skipped message ${msg.id} (not found or no permission)`);
-        }
-      } catch (err) {
-        state.failed++;
-        incrementFailure(classifyDeleteError(err));
-        const errMsg = err instanceof Error ? err.message : String(err);
-        await log(LogLevel.Error, `Failed to delete ${msg.id}: ${errMsg}`);
-      }
-
-      checkpoint.processedInActiveTarget =
-        (state.deleted - targetStartDeleted) +
-        (state.failed - targetStartFailed) +
-        (state.skipped - targetStartSkipped);
-      syncCheckpoint();
-      broadcastState();
+      await attemptDelete(msg);
     }
 
-    // After deleting a page, search from offset 0 (deleted messages shift indices)
-    offset = 0;
-    checkpoint.currentOffset = offset;
+    checkpoint.cursorBeforeId = decrementSnowflake(oldestAuthoredId);
+    checkpoint.currentOffset = 0;
     syncCheckpoint();
     await saveCheckpoint(checkpoint);
   }
@@ -475,6 +564,7 @@ async function startDeletion(
         checkpoint.activeTargetId = target.id;
         checkpoint.processedInActiveTarget = 0;
         checkpoint.currentOffset = 0;
+        checkpoint.cursorBeforeId = '';
       }
 
       await searchAndDeleteTarget(target, signal);
@@ -484,6 +574,7 @@ async function startDeletion(
       checkpoint.activeTargetId = '';
       checkpoint.processedInActiveTarget = 0;
       checkpoint.currentOffset = 0;
+      checkpoint.cursorBeforeId = '';
       syncCheckpoint();
       await saveCheckpoint(checkpoint);
     }
@@ -532,6 +623,7 @@ export default defineBackground(() => {
       completedTargets: Array.isArray(cp.completedTargets) ? cp.completedTargets : [],
       activeTargetId: typeof cp.activeTargetId === 'string' ? cp.activeTargetId : '',
       currentOffset: typeof cp.currentOffset === 'number' ? cp.currentOffset : 0,
+      cursorBeforeId: typeof cp.cursorBeforeId === 'string' ? cp.cursorBeforeId : '',
       processedInActiveTarget:
         typeof cp.processedInActiveTarget === 'number' ? cp.processedInActiveTarget : 0,
     };

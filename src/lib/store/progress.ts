@@ -11,6 +11,7 @@ export interface Checkpoint {
   completedTargets: string[];
   activeTargetId: string;
   currentOffset: number;
+  cursorBeforeId: string;
   processedInActiveTarget: number;
   updatedAt: number;
 }
@@ -22,6 +23,7 @@ export function defaultCheckpoint(state?: JobProgress): Checkpoint {
     completedTargets: [],
     activeTargetId: '',
     currentOffset: 0,
+    cursorBeforeId: '',
     processedInActiveTarget: 0,
     updatedAt: 0,
   };
