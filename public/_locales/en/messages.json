@@ -1,0 +1,273 @@
+{
+  "extension_name": {
+    "message": "Distroy"
+  },
+  "extension_description": {
+    "message": "GDPR-compliant mass deletion of your Discord messages."
+  },
+  "subtitle": {
+    "message": "Message Cleanup Tool"
+  },
+  "status_connected": {
+    "message": "Connected"
+  },
+  "status_awaiting_token": {
+    "message": "Awaiting token"
+  },
+  "no_token_title": {
+    "message": "No token detected"
+  },
+  "token_step_1": {
+    "message": "Open $link_start$discord.com$link_end$ in this browser",
+    "placeholders": {
+      "link_start": { "content": "$1" },
+      "link_end": { "content": "$2" }
+    }
+  },
+  "token_step_2": {
+    "message": "Log in to your account"
+  },
+  "token_step_3": {
+    "message": "Navigate to any channel or DM"
+  },
+  "token_hint": {
+    "message": "Captured automatically from network traffic."
+  },
+  "phase_scanning": {
+    "message": "Scanning"
+  },
+  "phase_scan_complete": {
+    "message": "Scan Complete"
+  },
+  "phase_deleting": {
+    "message": "Deleting"
+  },
+  "phase_paused": {
+    "message": "Paused"
+  },
+  "phase_complete": {
+    "message": "Complete"
+  },
+  "phase_error": {
+    "message": "Error"
+  },
+  "phase_ready": {
+    "message": "Ready"
+  },
+  "error_auth_expired": {
+    "message": "Authentication expired"
+  },
+  "error_access_denied": {
+    "message": "Access denied"
+  },
+  "error_rate_limited": {
+    "message": "Rate limited by Discord"
+  },
+  "error_network": {
+    "message": "Network error"
+  },
+  "error_generic": {
+    "message": "An unexpected error occurred"
+  },
+  "error_hint_auth": {
+    "message": "Reload Discord, log in again, then retry."
+  },
+  "error_hint_access": {
+    "message": "You may not have permission for that server."
+  },
+  "error_hint_rate": {
+    "message": "Wait a few minutes, then retry."
+  },
+  "error_hint_network": {
+    "message": "Check your connection and try again."
+  },
+  "error_hint_generic": {
+    "message": "Check the log for details, then retry."
+  },
+  "btn_retry": {
+    "message": "Retry"
+  },
+  "btn_scan": {
+    "message": "Scan Messages"
+  },
+  "btn_scan_again": {
+    "message": "Scan Again"
+  },
+  "scanning_discovering": {
+    "message": "Discovering servers and conversations\u2026"
+  },
+  "scanning_label": {
+    "message": "Scanning $target$\u2026",
+    "placeholders": {
+      "target": { "content": "$1" }
+    }
+  },
+  "scan_results_title": {
+    "message": "Scan Results"
+  },
+  "scan_no_messages": {
+    "message": "No messages found in any server or conversation."
+  },
+  "scan_summary": {
+    "message": "Found $count$ messages across $guilds$ servers and $dms$ conversations",
+    "placeholders": {
+      "count": { "content": "$1" },
+      "guilds": { "content": "$2" },
+      "dms": { "content": "$3" }
+    }
+  },
+  "select_all": {
+    "message": "All"
+  },
+  "select_none": {
+    "message": "None"
+  },
+  "btn_delete_selected": {
+    "message": "Delete Selected ($count$ messages)",
+    "placeholders": {
+      "count": { "content": "$1" }
+    }
+  },
+  "confirm_delete_title": {
+    "message": "Confirm permanent deletion"
+  },
+  "confirm_delete_body": {
+    "message": "This will permanently delete $count$ messages. This action cannot be undone.",
+    "placeholders": {
+      "count": { "content": "$1" }
+    }
+  },
+  "confirm_delete_confirm": {
+    "message": "Delete permanently"
+  },
+  "confirm_delete_cancel": {
+    "message": "Go back"
+  },
+  "stat_found": {
+    "message": "Found"
+  },
+  "stat_deleted": {
+    "message": "Deleted"
+  },
+  "stat_failed": {
+    "message": "Failed"
+  },
+  "stat_skipped": {
+    "message": "Skipped"
+  },
+  "summary_deletion_complete": {
+    "message": "Deletion Complete"
+  },
+  "summary_deleted": {
+    "message": "deleted"
+  },
+  "summary_failed": {
+    "message": "failed"
+  },
+  "summary_elapsed": {
+    "message": "elapsed"
+  },
+  "btn_pause": {
+    "message": "Pause"
+  },
+  "btn_resume": {
+    "message": "Resume"
+  },
+  "btn_cancel": {
+    "message": "Cancel"
+  },
+  "scope_filter_placeholder": {
+    "message": "Filter servers and DMs\u2026"
+  },
+  "scope_servers": {
+    "message": "Servers"
+  },
+  "scope_dms": {
+    "message": "DMs"
+  },
+  "scope_no_matches": {
+    "message": "No matches for \u201c$query$\u201d",
+    "placeholders": {
+      "query": { "content": "$1" }
+    }
+  },
+  "log_empty": {
+    "message": "Start a scan to see activity here"
+  },
+  "btn_show_log": {
+    "message": "Show log"
+  },
+  "btn_hide_log": {
+    "message": "Hide log"
+  },
+  "eta_less_than_one_min": {
+    "message": "<1 min left"
+  },
+  "eta_minutes": {
+    "message": "~$count$ min left",
+    "placeholders": {
+      "count": { "content": "$1" }
+    }
+  },
+  "eta_hours_minutes": {
+    "message": "~$hours$h $minutes$m left",
+    "placeholders": {
+      "hours": { "content": "$1" },
+      "minutes": { "content": "$2" }
+    }
+  },
+  "aria_token_connected": {
+    "message": "Token connected"
+  },
+  "aria_awaiting_token": {
+    "message": "Awaiting token"
+  },
+  "aria_dismiss_error": {
+    "message": "Dismiss error"
+  },
+  "aria_filter_scope": {
+    "message": "Filter scope list"
+  },
+  "aria_logs_panel": {
+    "message": "Activity log"
+  },
+  "triage_title": {
+    "message": "Failure Breakdown"
+  },
+  "triage_category_auth": {
+    "message": "Auth"
+  },
+  "triage_category_permission": {
+    "message": "Permission"
+  },
+  "triage_category_not_found": {
+    "message": "Not found"
+  },
+  "triage_category_rate_limited": {
+    "message": "Rate limited"
+  },
+  "triage_category_network": {
+    "message": "Network"
+  },
+  "triage_category_unknown": {
+    "message": "Unknown"
+  },
+  "triage_hint_auth": {
+    "message": "Your Discord session may be expired. Reopen Discord and retry."
+  },
+  "triage_hint_permission": {
+    "message": "Some channels deny deletion rights for your current account."
+  },
+  "triage_hint_not_found": {
+    "message": "Some messages were already removed or no longer visible in search."
+  },
+  "triage_hint_rate_limited": {
+    "message": "Discord throttled requests. The limiter adapts automatically in background."
+  },
+  "triage_hint_network": {
+    "message": "Network interruptions occurred. Retry when your connection is stable."
+  },
+  "triage_hint_unknown": {
+    "message": "Open the log for exact errors and retry the job."
+  }
+}

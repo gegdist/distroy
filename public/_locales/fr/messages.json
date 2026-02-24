@@ -1,0 +1,273 @@
+{
+  "extension_name": {
+    "message": "Distroy"
+  },
+  "extension_description": {
+    "message": "Suppression massive de vos messages Discord, conforme au RGPD."
+  },
+  "subtitle": {
+    "message": "Nettoyage de messages"
+  },
+  "status_connected": {
+    "message": "Connecté"
+  },
+  "status_awaiting_token": {
+    "message": "En attente du jeton"
+  },
+  "no_token_title": {
+    "message": "Aucun jeton détecté"
+  },
+  "token_step_1": {
+    "message": "Ouvrez $link_start$discord.com$link_end$ dans ce navigateur",
+    "placeholders": {
+      "link_start": { "content": "$1" },
+      "link_end": { "content": "$2" }
+    }
+  },
+  "token_step_2": {
+    "message": "Connectez-vous à votre compte"
+  },
+  "token_step_3": {
+    "message": "Naviguez vers un salon ou un message privé"
+  },
+  "token_hint": {
+    "message": "Capturé automatiquement depuis le trafic réseau."
+  },
+  "phase_scanning": {
+    "message": "Analyse en cours"
+  },
+  "phase_scan_complete": {
+    "message": "Analyse terminée"
+  },
+  "phase_deleting": {
+    "message": "Suppression"
+  },
+  "phase_paused": {
+    "message": "En pause"
+  },
+  "phase_complete": {
+    "message": "Terminé"
+  },
+  "phase_error": {
+    "message": "Erreur"
+  },
+  "phase_ready": {
+    "message": "Prêt"
+  },
+  "error_auth_expired": {
+    "message": "Authentification expirée"
+  },
+  "error_access_denied": {
+    "message": "Accès refusé"
+  },
+  "error_rate_limited": {
+    "message": "Limité par Discord"
+  },
+  "error_network": {
+    "message": "Erreur réseau"
+  },
+  "error_generic": {
+    "message": "Une erreur inattendue est survenue"
+  },
+  "error_hint_auth": {
+    "message": "Rechargez Discord, reconnectez-vous et réessayez."
+  },
+  "error_hint_access": {
+    "message": "Vous n'avez peut-être pas la permission pour ce serveur."
+  },
+  "error_hint_rate": {
+    "message": "Attendez quelques minutes, puis réessayez."
+  },
+  "error_hint_network": {
+    "message": "Vérifiez votre connexion et réessayez."
+  },
+  "error_hint_generic": {
+    "message": "Consultez le journal pour plus de détails, puis réessayez."
+  },
+  "btn_retry": {
+    "message": "Réessayer"
+  },
+  "btn_scan": {
+    "message": "Analyser les messages"
+  },
+  "btn_scan_again": {
+    "message": "Réanalyser"
+  },
+  "scanning_discovering": {
+    "message": "Découverte des serveurs et conversations\u2026"
+  },
+  "scanning_label": {
+    "message": "Analyse de $target$\u2026",
+    "placeholders": {
+      "target": { "content": "$1" }
+    }
+  },
+  "scan_results_title": {
+    "message": "Résultats de l'analyse"
+  },
+  "scan_no_messages": {
+    "message": "Aucun message trouvé dans les serveurs ou conversations."
+  },
+  "scan_summary": {
+    "message": "$count$ messages trouvés dans $guilds$ serveurs et $dms$ conversations",
+    "placeholders": {
+      "count": { "content": "$1" },
+      "guilds": { "content": "$2" },
+      "dms": { "content": "$3" }
+    }
+  },
+  "select_all": {
+    "message": "Tous"
+  },
+  "select_none": {
+    "message": "Aucun"
+  },
+  "btn_delete_selected": {
+    "message": "Supprimer la sélection ($count$ messages)",
+    "placeholders": {
+      "count": { "content": "$1" }
+    }
+  },
+  "confirm_delete_title": {
+    "message": "Confirmer la suppression définitive"
+  },
+  "confirm_delete_body": {
+    "message": "$count$ messages seront définitivement supprimés. Cette action est irréversible.",
+    "placeholders": {
+      "count": { "content": "$1" }
+    }
+  },
+  "confirm_delete_confirm": {
+    "message": "Supprimer définitivement"
+  },
+  "confirm_delete_cancel": {
+    "message": "Retour"
+  },
+  "stat_found": {
+    "message": "Trouvés"
+  },
+  "stat_deleted": {
+    "message": "Supprimés"
+  },
+  "stat_failed": {
+    "message": "Échoués"
+  },
+  "stat_skipped": {
+    "message": "Ignorés"
+  },
+  "summary_deletion_complete": {
+    "message": "Suppression terminée"
+  },
+  "summary_deleted": {
+    "message": "supprimés"
+  },
+  "summary_failed": {
+    "message": "échoués"
+  },
+  "summary_elapsed": {
+    "message": "durée"
+  },
+  "btn_pause": {
+    "message": "Pause"
+  },
+  "btn_resume": {
+    "message": "Reprendre"
+  },
+  "btn_cancel": {
+    "message": "Annuler"
+  },
+  "scope_filter_placeholder": {
+    "message": "Filtrer serveurs et MP\u2026"
+  },
+  "scope_servers": {
+    "message": "Serveurs"
+  },
+  "scope_dms": {
+    "message": "MP"
+  },
+  "scope_no_matches": {
+    "message": "Aucun résultat pour \u00ab\u202f$query$\u202f\u00bb",
+    "placeholders": {
+      "query": { "content": "$1" }
+    }
+  },
+  "log_empty": {
+    "message": "Lancez une analyse pour voir l'activité ici"
+  },
+  "btn_show_log": {
+    "message": "Afficher le journal"
+  },
+  "btn_hide_log": {
+    "message": "Masquer le journal"
+  },
+  "eta_less_than_one_min": {
+    "message": "<1 min restante"
+  },
+  "eta_minutes": {
+    "message": "~$count$ min restantes",
+    "placeholders": {
+      "count": { "content": "$1" }
+    }
+  },
+  "eta_hours_minutes": {
+    "message": "~$hours$h $minutes$m restantes",
+    "placeholders": {
+      "hours": { "content": "$1" },
+      "minutes": { "content": "$2" }
+    }
+  },
+  "aria_token_connected": {
+    "message": "Jeton connecté"
+  },
+  "aria_awaiting_token": {
+    "message": "En attente du jeton"
+  },
+  "aria_dismiss_error": {
+    "message": "Fermer l'erreur"
+  },
+  "aria_filter_scope": {
+    "message": "Filtrer la liste"
+  },
+  "aria_logs_panel": {
+    "message": "Journal d'activité"
+  },
+  "triage_title": {
+    "message": "Répartition des échecs"
+  },
+  "triage_category_auth": {
+    "message": "Auth"
+  },
+  "triage_category_permission": {
+    "message": "Permission"
+  },
+  "triage_category_not_found": {
+    "message": "Introuvable"
+  },
+  "triage_category_rate_limited": {
+    "message": "Limitation"
+  },
+  "triage_category_network": {
+    "message": "Réseau"
+  },
+  "triage_category_unknown": {
+    "message": "Inconnu"
+  },
+  "triage_hint_auth": {
+    "message": "Votre session Discord a peut-être expiré. Rouvrez Discord puis réessayez."
+  },
+  "triage_hint_permission": {
+    "message": "Certains salons refusent la suppression pour votre compte actuel."
+  },
+  "triage_hint_not_found": {
+    "message": "Certains messages étaient déjà supprimés ou ne sont plus visibles dans la recherche."
+  },
+  "triage_hint_rate_limited": {
+    "message": "Discord a limité les requêtes. Le limiteur s'adapte automatiquement en arrière-plan."
+  },
+  "triage_hint_network": {
+    "message": "Des interruptions réseau sont survenues. Réessayez avec une connexion stable."
+  },
+  "triage_hint_unknown": {
+    "message": "Ouvrez le journal pour les détails, puis relancez la tâche."
+  }
+}

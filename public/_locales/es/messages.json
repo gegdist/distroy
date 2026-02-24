@@ -1,0 +1,273 @@
+{
+  "extension_name": {
+    "message": "Distroy"
+  },
+  "extension_description": {
+    "message": "Eliminación masiva de tus mensajes de Discord, conforme al RGPD."
+  },
+  "subtitle": {
+    "message": "Limpieza de mensajes"
+  },
+  "status_connected": {
+    "message": "Conectado"
+  },
+  "status_awaiting_token": {
+    "message": "Esperando token"
+  },
+  "no_token_title": {
+    "message": "No se detectó token"
+  },
+  "token_step_1": {
+    "message": "Abre $link_start$discord.com$link_end$ en este navegador",
+    "placeholders": {
+      "link_start": { "content": "$1" },
+      "link_end": { "content": "$2" }
+    }
+  },
+  "token_step_2": {
+    "message": "Inicia sesión en tu cuenta"
+  },
+  "token_step_3": {
+    "message": "Navega a cualquier canal o mensaje directo"
+  },
+  "token_hint": {
+    "message": "Se captura automáticamente del tráfico de red."
+  },
+  "phase_scanning": {
+    "message": "Analizando"
+  },
+  "phase_scan_complete": {
+    "message": "Análisis completado"
+  },
+  "phase_deleting": {
+    "message": "Eliminando"
+  },
+  "phase_paused": {
+    "message": "En pausa"
+  },
+  "phase_complete": {
+    "message": "Completado"
+  },
+  "phase_error": {
+    "message": "Error"
+  },
+  "phase_ready": {
+    "message": "Listo"
+  },
+  "error_auth_expired": {
+    "message": "Autenticación expirada"
+  },
+  "error_access_denied": {
+    "message": "Acceso denegado"
+  },
+  "error_rate_limited": {
+    "message": "Limitado por Discord"
+  },
+  "error_network": {
+    "message": "Error de red"
+  },
+  "error_generic": {
+    "message": "Ocurrió un error inesperado"
+  },
+  "error_hint_auth": {
+    "message": "Recarga Discord, vuelve a iniciar sesión e inténtalo de nuevo."
+  },
+  "error_hint_access": {
+    "message": "Es posible que no tengas permiso para ese servidor."
+  },
+  "error_hint_rate": {
+    "message": "Espera unos minutos e inténtalo de nuevo."
+  },
+  "error_hint_network": {
+    "message": "Comprueba tu conexión e inténtalo de nuevo."
+  },
+  "error_hint_generic": {
+    "message": "Revisa el registro para más detalles e inténtalo de nuevo."
+  },
+  "btn_retry": {
+    "message": "Reintentar"
+  },
+  "btn_scan": {
+    "message": "Analizar mensajes"
+  },
+  "btn_scan_again": {
+    "message": "Analizar de nuevo"
+  },
+  "scanning_discovering": {
+    "message": "Descubriendo servidores y conversaciones\u2026"
+  },
+  "scanning_label": {
+    "message": "Analizando $target$\u2026",
+    "placeholders": {
+      "target": { "content": "$1" }
+    }
+  },
+  "scan_results_title": {
+    "message": "Resultados del análisis"
+  },
+  "scan_no_messages": {
+    "message": "No se encontraron mensajes en ningún servidor o conversación."
+  },
+  "scan_summary": {
+    "message": "$count$ mensajes encontrados en $guilds$ servidores y $dms$ conversaciones",
+    "placeholders": {
+      "count": { "content": "$1" },
+      "guilds": { "content": "$2" },
+      "dms": { "content": "$3" }
+    }
+  },
+  "select_all": {
+    "message": "Todos"
+  },
+  "select_none": {
+    "message": "Ninguno"
+  },
+  "btn_delete_selected": {
+    "message": "Eliminar selección ($count$ mensajes)",
+    "placeholders": {
+      "count": { "content": "$1" }
+    }
+  },
+  "confirm_delete_title": {
+    "message": "Confirmar eliminación permanente"
+  },
+  "confirm_delete_body": {
+    "message": "Se eliminarán permanentemente $count$ mensajes. Esta acción no se puede deshacer.",
+    "placeholders": {
+      "count": { "content": "$1" }
+    }
+  },
+  "confirm_delete_confirm": {
+    "message": "Eliminar permanentemente"
+  },
+  "confirm_delete_cancel": {
+    "message": "Volver"
+  },
+  "stat_found": {
+    "message": "Encontrados"
+  },
+  "stat_deleted": {
+    "message": "Eliminados"
+  },
+  "stat_failed": {
+    "message": "Fallidos"
+  },
+  "stat_skipped": {
+    "message": "Omitidos"
+  },
+  "summary_deletion_complete": {
+    "message": "Eliminación completada"
+  },
+  "summary_deleted": {
+    "message": "eliminados"
+  },
+  "summary_failed": {
+    "message": "fallidos"
+  },
+  "summary_elapsed": {
+    "message": "transcurrido"
+  },
+  "btn_pause": {
+    "message": "Pausar"
+  },
+  "btn_resume": {
+    "message": "Reanudar"
+  },
+  "btn_cancel": {
+    "message": "Cancelar"
+  },
+  "scope_filter_placeholder": {
+    "message": "Filtrar servidores y MDs\u2026"
+  },
+  "scope_servers": {
+    "message": "Servidores"
+  },
+  "scope_dms": {
+    "message": "MDs"
+  },
+  "scope_no_matches": {
+    "message": "Sin resultados para \u201c$query$\u201d",
+    "placeholders": {
+      "query": { "content": "$1" }
+    }
+  },
+  "log_empty": {
+    "message": "Inicia un análisis para ver la actividad aquí"
+  },
+  "btn_show_log": {
+    "message": "Mostrar registro"
+  },
+  "btn_hide_log": {
+    "message": "Ocultar registro"
+  },
+  "eta_less_than_one_min": {
+    "message": "<1 min restante"
+  },
+  "eta_minutes": {
+    "message": "~$count$ min restantes",
+    "placeholders": {
+      "count": { "content": "$1" }
+    }
+  },
+  "eta_hours_minutes": {
+    "message": "~$hours$h $minutes$m restantes",
+    "placeholders": {
+      "hours": { "content": "$1" },
+      "minutes": { "content": "$2" }
+    }
+  },
+  "aria_token_connected": {
+    "message": "Token conectado"
+  },
+  "aria_awaiting_token": {
+    "message": "Esperando token"
+  },
+  "aria_dismiss_error": {
+    "message": "Cerrar error"
+  },
+  "aria_filter_scope": {
+    "message": "Filtrar la lista"
+  },
+  "aria_logs_panel": {
+    "message": "Registro de actividad"
+  },
+  "triage_title": {
+    "message": "Desglose de fallos"
+  },
+  "triage_category_auth": {
+    "message": "Auth"
+  },
+  "triage_category_permission": {
+    "message": "Permiso"
+  },
+  "triage_category_not_found": {
+    "message": "No encontrado"
+  },
+  "triage_category_rate_limited": {
+    "message": "Límite"
+  },
+  "triage_category_network": {
+    "message": "Red"
+  },
+  "triage_category_unknown": {
+    "message": "Desconocido"
+  },
+  "triage_hint_auth": {
+    "message": "Tu sesión de Discord puede haber expirado. Reabre Discord y reintenta."
+  },
+  "triage_hint_permission": {
+    "message": "Algunos canales no permiten borrar mensajes con tu cuenta actual."
+  },
+  "triage_hint_not_found": {
+    "message": "Algunos mensajes ya fueron eliminados o ya no aparecen en la búsqueda."
+  },
+  "triage_hint_rate_limited": {
+    "message": "Discord limitó las solicitudes. El limitador se ajusta automáticamente en segundo plano."
+  },
+  "triage_hint_network": {
+    "message": "Hubo interrupciones de red. Reintenta con una conexión estable."
+  },
+  "triage_hint_unknown": {
+    "message": "Abre el registro para ver detalles y vuelve a ejecutar la tarea."
+  }
+}

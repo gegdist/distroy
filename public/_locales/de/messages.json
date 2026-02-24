@@ -1,0 +1,273 @@
+{
+  "extension_name": {
+    "message": "Distroy"
+  },
+  "extension_description": {
+    "message": "DSGVO-konforme Massenlöschung deiner Discord-Nachrichten."
+  },
+  "subtitle": {
+    "message": "Nachrichten-Bereinigung"
+  },
+  "status_connected": {
+    "message": "Verbunden"
+  },
+  "status_awaiting_token": {
+    "message": "Warte auf Token"
+  },
+  "no_token_title": {
+    "message": "Kein Token erkannt"
+  },
+  "token_step_1": {
+    "message": "Öffne $link_start$discord.com$link_end$ in diesem Browser",
+    "placeholders": {
+      "link_start": { "content": "$1" },
+      "link_end": { "content": "$2" }
+    }
+  },
+  "token_step_2": {
+    "message": "Melde dich mit deinem Konto an"
+  },
+  "token_step_3": {
+    "message": "Navigiere zu einem Kanal oder einer DM"
+  },
+  "token_hint": {
+    "message": "Wird automatisch aus dem Netzwerkverkehr erfasst."
+  },
+  "phase_scanning": {
+    "message": "Wird gescannt"
+  },
+  "phase_scan_complete": {
+    "message": "Scan abgeschlossen"
+  },
+  "phase_deleting": {
+    "message": "Löschung"
+  },
+  "phase_paused": {
+    "message": "Pausiert"
+  },
+  "phase_complete": {
+    "message": "Abgeschlossen"
+  },
+  "phase_error": {
+    "message": "Fehler"
+  },
+  "phase_ready": {
+    "message": "Bereit"
+  },
+  "error_auth_expired": {
+    "message": "Authentifizierung abgelaufen"
+  },
+  "error_access_denied": {
+    "message": "Zugriff verweigert"
+  },
+  "error_rate_limited": {
+    "message": "Von Discord gedrosselt"
+  },
+  "error_network": {
+    "message": "Netzwerkfehler"
+  },
+  "error_generic": {
+    "message": "Ein unerwarteter Fehler ist aufgetreten"
+  },
+  "error_hint_auth": {
+    "message": "Lade Discord neu, melde dich erneut an und versuche es noch einmal."
+  },
+  "error_hint_access": {
+    "message": "Du hast möglicherweise keine Berechtigung für diesen Server."
+  },
+  "error_hint_rate": {
+    "message": "Warte einige Minuten und versuche es dann erneut."
+  },
+  "error_hint_network": {
+    "message": "Überprüfe deine Verbindung und versuche es erneut."
+  },
+  "error_hint_generic": {
+    "message": "Prüfe das Protokoll für Details und versuche es erneut."
+  },
+  "btn_retry": {
+    "message": "Erneut versuchen"
+  },
+  "btn_scan": {
+    "message": "Nachrichten scannen"
+  },
+  "btn_scan_again": {
+    "message": "Erneut scannen"
+  },
+  "scanning_discovering": {
+    "message": "Server und Unterhaltungen werden erkannt\u2026"
+  },
+  "scanning_label": {
+    "message": "$target$ wird gescannt\u2026",
+    "placeholders": {
+      "target": { "content": "$1" }
+    }
+  },
+  "scan_results_title": {
+    "message": "Scan-Ergebnisse"
+  },
+  "scan_no_messages": {
+    "message": "Keine Nachrichten in Servern oder Unterhaltungen gefunden."
+  },
+  "scan_summary": {
+    "message": "$count$ Nachrichten in $guilds$ Servern und $dms$ Unterhaltungen gefunden",
+    "placeholders": {
+      "count": { "content": "$1" },
+      "guilds": { "content": "$2" },
+      "dms": { "content": "$3" }
+    }
+  },
+  "select_all": {
+    "message": "Alle"
+  },
+  "select_none": {
+    "message": "Keine"
+  },
+  "btn_delete_selected": {
+    "message": "Auswahl löschen ($count$ Nachrichten)",
+    "placeholders": {
+      "count": { "content": "$1" }
+    }
+  },
+  "confirm_delete_title": {
+    "message": "Endgültiges Löschen bestätigen"
+  },
+  "confirm_delete_body": {
+    "message": "$count$ Nachrichten werden unwiderruflich gelöscht. Diese Aktion kann nicht rückgängig gemacht werden.",
+    "placeholders": {
+      "count": { "content": "$1" }
+    }
+  },
+  "confirm_delete_confirm": {
+    "message": "Endgültig löschen"
+  },
+  "confirm_delete_cancel": {
+    "message": "Zurück"
+  },
+  "stat_found": {
+    "message": "Gefunden"
+  },
+  "stat_deleted": {
+    "message": "Gelöscht"
+  },
+  "stat_failed": {
+    "message": "Fehlgeschlagen"
+  },
+  "stat_skipped": {
+    "message": "Übersprungen"
+  },
+  "summary_deletion_complete": {
+    "message": "Löschung abgeschlossen"
+  },
+  "summary_deleted": {
+    "message": "gelöscht"
+  },
+  "summary_failed": {
+    "message": "fehlgeschlagen"
+  },
+  "summary_elapsed": {
+    "message": "Dauer"
+  },
+  "btn_pause": {
+    "message": "Pausieren"
+  },
+  "btn_resume": {
+    "message": "Fortsetzen"
+  },
+  "btn_cancel": {
+    "message": "Abbrechen"
+  },
+  "scope_filter_placeholder": {
+    "message": "Server und DMs filtern\u2026"
+  },
+  "scope_servers": {
+    "message": "Server"
+  },
+  "scope_dms": {
+    "message": "DMs"
+  },
+  "scope_no_matches": {
+    "message": "Keine Treffer für \u201e$query$\u201c",
+    "placeholders": {
+      "query": { "content": "$1" }
+    }
+  },
+  "log_empty": {
+    "message": "Starte einen Scan, um Aktivitäten zu sehen"
+  },
+  "btn_show_log": {
+    "message": "Protokoll anzeigen"
+  },
+  "btn_hide_log": {
+    "message": "Protokoll ausblenden"
+  },
+  "eta_less_than_one_min": {
+    "message": "<1 Min. verbleibend"
+  },
+  "eta_minutes": {
+    "message": "~$count$ Min. verbleibend",
+    "placeholders": {
+      "count": { "content": "$1" }
+    }
+  },
+  "eta_hours_minutes": {
+    "message": "~$hours$ Std. $minutes$ Min. verbleibend",
+    "placeholders": {
+      "hours": { "content": "$1" },
+      "minutes": { "content": "$2" }
+    }
+  },
+  "aria_token_connected": {
+    "message": "Token verbunden"
+  },
+  "aria_awaiting_token": {
+    "message": "Warte auf Token"
+  },
+  "aria_dismiss_error": {
+    "message": "Fehler schließen"
+  },
+  "aria_filter_scope": {
+    "message": "Umfangsliste filtern"
+  },
+  "aria_logs_panel": {
+    "message": "Aktivitätsprotokoll"
+  },
+  "triage_title": {
+    "message": "Fehlerübersicht"
+  },
+  "triage_category_auth": {
+    "message": "Auth"
+  },
+  "triage_category_permission": {
+    "message": "Berechtigung"
+  },
+  "triage_category_not_found": {
+    "message": "Nicht gefunden"
+  },
+  "triage_category_rate_limited": {
+    "message": "Rate-Limit"
+  },
+  "triage_category_network": {
+    "message": "Netzwerk"
+  },
+  "triage_category_unknown": {
+    "message": "Unbekannt"
+  },
+  "triage_hint_auth": {
+    "message": "Deine Discord-Sitzung könnte abgelaufen sein. Öffne Discord neu und versuche es erneut."
+  },
+  "triage_hint_permission": {
+    "message": "In einigen Kanälen fehlen deinem Konto Löschrechte."
+  },
+  "triage_hint_not_found": {
+    "message": "Einige Nachrichten wurden bereits entfernt oder sind in der Suche nicht mehr sichtbar."
+  },
+  "triage_hint_rate_limited": {
+    "message": "Discord hat Anfragen gedrosselt. Das Limit wird im Hintergrund automatisch angepasst."
+  },
+  "triage_hint_network": {
+    "message": "Es gab Netzwerkunterbrechungen. Versuche es mit stabiler Verbindung erneut."
+  },
+  "triage_hint_unknown": {
+    "message": "Öffne das Protokoll für Details und starte den Vorgang erneut."
+  }
+}
